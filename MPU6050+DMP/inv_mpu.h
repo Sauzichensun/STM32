@@ -128,7 +128,7 @@ int mpu_register_tap_cb(void (*func)(unsigned char, unsigned char));
 /*********************/
 void get_ms(unsigned long *time);	
 u8  MPU6050_DMP_Init(void);
-u8 	MPU6050_DMP_Get_Data(float *pitch,float *roll,float *yaw);//10MS  100HZµ÷ÓÃÒ»ÏÂ£¬¸ø DEFAULT_MPU_HZ ÆµÂÊ±£³ÖÒ»ÖÂ
+u8 	MPU6050_DMP_Get_Data(float *pitch,float *roll,float *yaw);//10MS  100HZè°ƒç”¨ä¸€ä¸‹ï¼Œç»™ DEFAULT_MPU_HZ é¢‘ç‡ä¿æŒä¸€è‡´
 /*********************/
 /********************/
 #endif  /* #ifndef _INV_MPU_H_ */
