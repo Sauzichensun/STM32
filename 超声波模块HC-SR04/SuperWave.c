@@ -110,8 +110,8 @@ void TIM2_IRQHandler(void){
 			{
 				superwavecnt++;
 			}
-			/*定时1s进行采样*/
-			if(superwavecnt>1000)
+			/*定时10s进行采样,采样周期越短，相同时间采样次数较多，可进行均值调整*/
+			if(superwavecnt>100)
 			{
 				detect_distance_start();
 				superwavecnt=0;
