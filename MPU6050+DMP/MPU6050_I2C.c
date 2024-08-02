@@ -2,7 +2,7 @@
  
 void MPU6050_IIC_IO_Init(void)
 {
-  My_GPIO_Init(MPU6050_IIC_GPIO,MPU6050_IIC_SCL_Pin|MPU6050_IIC_SDA_Pin,GPIO_TW_OUT,GPIO_P_NO,GPIO_50MHz);//ÍÆÍìÊä³ö ²»À­ 50m
+  My_GPIO_Init(MPU6050_IIC_GPIO,MPU6050_IIC_SCL_Pin|MPU6050_IIC_SDA_Pin,GPIO_TW_OUT,GPIO_P_NO,GPIO_50MHz);//æŽ¨æŒ½è¾“å‡º ä¸æ‹‰ 50m
  
 	MPU6050_IIC_SCL=1;
 	MPU6050_IIC_SDA=1;
@@ -10,14 +10,14 @@ void MPU6050_IIC_IO_Init(void)
 
 void MPU6050_IIC_SDA_IO_OUT(void)
 {
-	My_GPIO_Init(MPU6050_IIC_GPIO,MPU6050_IIC_SDA_Pin,GPIO_TW_OUT,GPIO_P_NO,GPIO_50MHz);//ÍÆÍìÊä³ö ²»À­ 50m
+	My_GPIO_Init(MPU6050_IIC_GPIO,MPU6050_IIC_SDA_Pin,GPIO_TW_OUT,GPIO_P_NO,GPIO_50MHz);//æŽ¨æŒ½è¾“å‡º ä¸æ‹‰ 50m
 }
 
 void MPU6050_IIC_SDA_IO_IN(void)
 {
-	My_GPIO_Init(MPU6050_IIC_GPIO,MPU6050_IIC_SDA_Pin,GPIO_FK_IN,GPIO_P_UP,GPIO_50MHz);//¸¡¿ÕÊäÈë ÉÏÀ­ 50m
+	My_GPIO_Init(MPU6050_IIC_GPIO,MPU6050_IIC_SDA_Pin,GPIO_FK_IN,GPIO_P_UP,GPIO_50MHz);//æµ®ç©ºè¾“å…¥ ä¸Šæ‹‰ 50m
 }
-//²úÉúMPU6050_IICÆðÊ¼ÐÅºÅ
+//äº§ç”ŸMPU6050_IICèµ·å§‹ä¿¡å·
 void MPU6050_IIC_Start(void)
 {
 	  MPU6050_IIC_SDA_IO_OUT();
@@ -28,7 +28,7 @@ void MPU6050_IIC_Start(void)
 		MPU6050_IIC_delay_4us();
 		MPU6050_IIC_SCL=0; 
 }	  
-//²úÉúMPU6050_IICÍ£Ö¹ÐÅºÅ
+//äº§ç”ŸMPU6050_IICåœæ­¢ä¿¡å·
 void MPU6050_IIC_Stop(void)
 {
 	  MPU6050_IIC_SDA_IO_OUT();
@@ -40,9 +40,9 @@ void MPU6050_IIC_Stop(void)
 		MPU6050_IIC_SDA=1;   
 		MPU6050_IIC_delay_4us();  					   	
 	}
-//µÈ´ýÓ¦´ðÐÅºÅµ½À´
-//·µ»ØÖµ£º1£¬½ÓÊÕÓ¦´ðÊ§°Ü
-//        0£¬½ÓÊÕÓ¦´ð³É¹¦
+//ç­‰å¾…åº”ç­”ä¿¡å·åˆ°æ¥
+//è¿”å›žå€¼ï¼š1ï¼ŒæŽ¥æ”¶åº”ç­”å¤±è´¥
+//        0ï¼ŒæŽ¥æ”¶åº”ç­”æˆåŠŸ
 u8 MPU6050_IIC_Read_Ack(void)
 {
 		u8 ucErrTime=0;
@@ -63,7 +63,7 @@ u8 MPU6050_IIC_Read_Ack(void)
 		MPU6050_IIC_SCL=0; 	   
 		return 0;  
 } 
-//·¢ËÍACKÓ¦´ð
+//å‘é€ACKåº”ç­”
 void MPU6050_IIC_Send_Ack(u8 ack)
 {
 		MPU6050_IIC_SDA_IO_OUT();
@@ -74,10 +74,10 @@ void MPU6050_IIC_Send_Ack(u8 ack)
 		MPU6050_IIC_delay_4us();
 		MPU6050_IIC_SCL=0;
 }				 				     
-//MPU6050_IIC·¢ËÍÒ»¸ö×Ö½Ú
-//·µ»Ø´Ó»úÓÐÎÞÓ¦´ð
-//1£¬ÓÐÓ¦´ð
-//0£¬ÎÞÓ¦´ð			  
+//MPU6050_IICå‘é€ä¸€ä¸ªå­—èŠ‚
+//è¿”å›žä»Žæœºæœ‰æ— åº”ç­”
+//1ï¼Œæœ‰åº”ç­”
+//0ï¼Œæ— åº”ç­”			  
 void MPU6050_IIC_Send_Byte(u8 txd)
 {                        
     u8 t;
@@ -98,7 +98,7 @@ void MPU6050_IIC_Send_Byte(u8 txd)
     }
     MPU6050_IIC_Read_Ack();		
 } 	    
-//¶Á1¸ö×Ö½Ú£¬ack=1Ê±£¬·¢ËÍACK£¬ack=0£¬·¢ËÍnACK   
+//è¯»1ä¸ªå­—èŠ‚ï¼Œack=1æ—¶ï¼Œå‘é€ACKï¼Œack=0ï¼Œå‘é€nACK   
 u8 MPU6050_IIC_Read_Byte(u8 ack)
 {
 		unsigned char i,receive=0;
