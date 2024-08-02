@@ -35,18 +35,18 @@
 #include "MPU6050.h"
 #include "Delay.h"
 
-#define   MPU6050			//¶¨ÒåÎÒÃÇÊ¹ÓÃµÄ´«¸ĞÆ÷ÎªMPU6050
+#define   MPU6050			//å®šä¹‰æˆ‘ä»¬ä½¿ç”¨çš„ä¼ æ„Ÿå™¨ä¸ºMPU6050
 
-//ÏÂÃæ8¸öº¯Êı¶Ô½Ódmp¿â
-#define delay_ms    delay_ms       //delayÊµÏÖ
-#define get_ms      get_ms         //×Ô¼ºĞ´Ò»¸ö
+//ä¸‹é¢8ä¸ªå‡½æ•°å¯¹æ¥dmpåº“
+#define delay_ms    delay_ms       //delayå®ç°
+#define get_ms      get_ms         //è‡ªå·±å†™ä¸€ä¸ª
 #define i2c_write   mpu6050_write
 #define i2c_read    mpu6050_read
-#define labs        labs           //stm32×Ô´ø
-#define fabs        fabsf          //stm32×Ô´ø
-#define min(a,b)    ((a<b)?a:b)    //×Ô¼ºĞ´Ò»¸ö
-#define log_i(...)  do {} while (0)//×Ô¼ºĞ´Ò»¸ö
-#define log_e(...)  do {} while (0)//×Ô¼ºĞ´Ò»¸ö	
+#define labs        labs           //stm32è‡ªå¸¦
+#define fabs        fabsf          //stm32è‡ªå¸¦
+#define min(a,b)    ((a<b)?a:b)    //è‡ªå·±å†™ä¸€ä¸ª
+#define log_i(...)  do {} while (0)//è‡ªå·±å†™ä¸€ä¸ª
+#define log_e(...)  do {} while (0)//è‡ªå·±å†™ä¸€ä¸ª	
 	
 int dmp_set_gyro_bias(long *bias) ;
 int dmp_set_accel_bias(long *bias);
@@ -2871,46 +2871,46 @@ lp_int_restore:
  */
 
 #define q30  1073741824.0f
-static signed char gyro_orientation[9] = { 1, 0, 0,//²»Òª¸Ä
+static signed char gyro_orientation[9] = { 1, 0, 0,//ä¸è¦æ”¹
                                            0, 1, 0,
                                            0, 0, 1};
-//MPU6050×Ô²âÊÔ
-//·µ»ØÖµ:0,Õı³£
-//    ÆäËû,Ê§°Ü
+//MPU6050è‡ªæµ‹è¯•
+//è¿”å›å€¼:0,æ­£å¸¸
+//    å…¶ä»–,å¤±è´¥
  
 void get_ms(unsigned long *time){}	
  
-//mpu6050,dmp³õÊ¼»¯
-//·µ»ØÖµ:0,Õı³£
-//    ÆäËû,Ê§°Ü	
+//mpu6050,dmpåˆå§‹åŒ–
+//è¿”å›å€¼:0,æ­£å¸¸
+//    å…¶ä»–,å¤±è´¥	
 u8 MPU6050_DMP_Init(void)
 {
 	MPU6050_IIC_IO_Init();                                                    
-	if(!mpu_init())                                                               //mpu³õÊ¼»¯
+	if(!mpu_init())                                                               //mpuåˆå§‹åŒ–
 	{	
-		mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL);		                      //ÉèÖÃĞèÒªµÄ´«¸ĞÆ÷
-		mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);	                      //ÉèÖÃfifo
-		mpu_set_sample_rate(DEFAULT_MPU_HZ);	   	  		                        //ÉèÖÃ²É¼¯ÑùÂÊ,¶à¾Ã¸üĞÂfifo£¬²¢²úÉúintÖĞ¶Ï
-		dmp_load_motion_driver_firmware();   	  			                          //¼ÓÔØdmp¹Ì¼ş
-		dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation));//ÉèÖÃÍÓÂİÒÇ·½Ïò
+		mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL);		                      //è®¾ç½®éœ€è¦çš„ä¼ æ„Ÿå™¨
+		mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);	                      //è®¾ç½®fifo
+		mpu_set_sample_rate(DEFAULT_MPU_HZ);	   	  		                        //è®¾ç½®é‡‡é›†æ ·ç‡,å¤šä¹…æ›´æ–°fifoï¼Œå¹¶äº§ç”Ÿintä¸­æ–­
+		dmp_load_motion_driver_firmware();   	  			                          //åŠ è½½dmpå›ºä»¶
+		dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation));//è®¾ç½®é™€èºä»ªæ–¹å‘
 		dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP |
 		    DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO |
 		    DMP_FEATURE_GYRO_CAL);	   	 					                                //dmp_enable_feature
-		dmp_set_fifo_rate(DEFAULT_MPU_HZ);   	 			                            //ÉèÖÃ²É¼¯ÑùÂÊ,¶à¾Ã¸üĞÂfifo£¬²¢²úÉúintÖĞ¶Ï
-		run_self_test();		                                                        //×Ô¼ì
-		mpu_set_dmp_state(1);                                                   //Ê¹ÄÜ
+		dmp_set_fifo_rate(DEFAULT_MPU_HZ);   	 			                            //è®¾ç½®é‡‡é›†æ ·ç‡,å¤šä¹…æ›´æ–°fifoï¼Œå¹¶äº§ç”Ÿintä¸­æ–­
+		run_self_test();		                                                        //è‡ªæ£€
+		mpu_set_dmp_state(1);                                                   //ä½¿èƒ½
 	}
 	return 0;
 }
 
-//µÃµ½dmp´¦ÀíºóµÄÊı¾İ(×¢Òâ,±¾º¯ÊıĞèÒª±È½Ï¶à¶ÑÕ»,¾Ö²¿±äÁ¿ÓĞµã¶à)
-//pitch:¸©Ñö½Ç ¾«¶È:0.1¡ã   ·¶Î§:-90.0¡ã <---> +90.0¡ã
-//roll:ºá¹ö½Ç  ¾«¶È:0.1¡ã   ·¶Î§:-180.0¡ã<---> +180.0¡ã
-//yaw:º½Ïò½Ç   ¾«¶È:0.1¡ã   ·¶Î§:-180.0¡ã<---> +180.0¡ã
-//·µ»ØÖµ:0,Õı³£
-//    ÆäËû,Ê§°Ü
-u8 MPU6050_DMP_Get_Data(float *pitch,float *roll,float *yaw)//£¨5MS  200HZµ÷ÓÃÒ»ÏÂ£¬¸ø DEFAULT_MPU_HZ ÆµÂÊ±£³ÖÒ»ÖÂ£¬»òÕßintÖĞ¶ÏÒı½Å¶ÁÈ¡£©
-{                              //  £¨´Ë´¦ÔÚÖ÷º¯ÊıÖĞÒ»Ö±µ÷ÓÃ£¬ÔÚÖĞ¶Ïº¯ÊıÀï¸üĞÂ ÆµÂÊÎ´±ä£©
+//å¾—åˆ°dmpå¤„ç†åçš„æ•°æ®(æ³¨æ„,æœ¬å‡½æ•°éœ€è¦æ¯”è¾ƒå¤šå †æ ˆ,å±€éƒ¨å˜é‡æœ‰ç‚¹å¤š)
+//pitch:ä¿¯ä»°è§’ ç²¾åº¦:0.1Â°   èŒƒå›´:-90.0Â° <---> +90.0Â°
+//roll:æ¨ªæ»šè§’  ç²¾åº¦:0.1Â°   èŒƒå›´:-180.0Â°<---> +180.0Â°
+//yaw:èˆªå‘è§’   ç²¾åº¦:0.1Â°   èŒƒå›´:-180.0Â°<---> +180.0Â°
+//è¿”å›å€¼:0,æ­£å¸¸
+//    å…¶ä»–,å¤±è´¥
+u8 MPU6050_DMP_Get_Data(float *pitch,float *roll,float *yaw)//ï¼ˆ5MS  200HZè°ƒç”¨ä¸€ä¸‹ï¼Œç»™ DEFAULT_MPU_HZ é¢‘ç‡ä¿æŒä¸€è‡´ï¼Œæˆ–è€…intä¸­æ–­å¼•è„šè¯»å–ï¼‰
+{                              //  ï¼ˆæ­¤å¤„åœ¨ä¸»å‡½æ•°ä¸­ä¸€ç›´è°ƒç”¨ï¼Œåœ¨ä¸­æ–­å‡½æ•°é‡Œæ›´æ–° é¢‘ç‡æœªå˜ï¼‰
 	float q0=1.0f,q1=0.0f,q2=0.0f,q3=0.0f;
 	unsigned long sensor_timestamp;
 	short gyro[3], accel[3], sensors;
@@ -2929,11 +2929,11 @@ u8 MPU6050_DMP_Get_Data(float *pitch,float *roll,float *yaw)//£¨5MS  200HZµ÷ÓÃÒ»
 	**/
 	if(sensors&INV_WXYZ_QUAT) 
 	{
-		q0 = quat[0] / q30;	//q30¸ñÊ½×ª»»Îª¸¡µãÊı
+		q0 = quat[0] / q30;	//q30æ ¼å¼è½¬æ¢ä¸ºæµ®ç‚¹æ•°
 		q1 = quat[1] / q30;
 		q2 = quat[2] / q30;
 		q3 = quat[3] / q30; 
-		//¼ÆËãµÃµ½¸©Ñö½Ç/ºá¹ö½Ç/º½Ïò½Ç
+		//è®¡ç®—å¾—åˆ°ä¿¯ä»°è§’/æ¨ªæ»šè§’/èˆªå‘è§’
 		*pitch = asin(-2 * q1 * q3 + 2 * q0* q2)* 57.3;	// pitch
 		*roll  = atan2(2 * q2 * q3 + 2 * q0 * q1, -2 * q1 * q1 - 2 * q2* q2 + 1)* 57.3;	// roll
 		*yaw   = atan2(2*(q1*q2 + q0*q3),q0*q0+q1*q1-q2*q2-q3*q3) * 57.3;	//yaw
